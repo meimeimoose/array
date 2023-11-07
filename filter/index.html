@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>title</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      a {
+        margin: 2rem 0;
+        font-size: 1.6rem;
+        color: #838383;
+        text-decoration: none;
+        padding-right: 1.8rem;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .a-active {
+        font-size: 2rem;
+        font-weight: bolder;
+        color: #0d6efd;
+        padding-bottom: 0.25rem;
+      }
+      .w-600 {
+        width: 500px;
+      }
+
+      .code {
+        background-color: rgb(242, 242, 242);
+        padding: 2rem 1.5rem;
+        border-radius: 18px;
+      }
+      .w-400 {
+        width: 360px;
+      }
+      .highlight {
+        margin-left: 1rem;
+        border-left: 4px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <a href="/../index.html">Array | 基本陣列 CRUD</a>
+        <a class="a-active" href="/index.html">Array | 陣列排序之方</a>
+      </div>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button
+            class="nav-link me-4 active"
+            id="nav-reverse-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-reverse"
+            type="button"
+            role="tab"
+            aria-controls="nav-reverse"
+            aria-selected="true"
+          >
+            反轉
+          </button>
+          <button
+            class="nav-link me-4"
+            id="nav-sort-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-sort"
+            type="button"
+            role="tab"
+            aria-controls="nav-sort"
+            aria-selected="false"
+          >
+            排序
+          </button>
+          <button
+            class="nav-link me-4"
+            id="nav-to-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-to"
+            type="button"
+            role="tab"
+            aria-controls="nav-to"
+            aria-selected="false"
+          >
+            不更動原陣列的反轉 / 排序
+          </button>
+        </div>
+      </nav>
+      <div class="tab-content mt-4" id="nav-tabContent">
+        <!-- 反轉陣列 -->
+        <div
+          class="tab-pane fade show active"
+          id="nav-reverse"
+          role="tabpanel"
+          aria-labelledby="nav-reverse-tab"
+          tabindex="0"
+        >
+          <h4>reverse()</h4>
+          <h5>將陣列元素順序反轉，會改變原始陣列</h5>
+          <p class="code">
+            <span class="text-primary">let </span> arrName =
+            ['柏叡','騰寓','胤辰']
+          </p>
+          <hr />
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">
+              <span class="text-primary">let </span>arrNameReversed =
+              arrNum.reverse()
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="reverseArray1()"
+              >
+                Try me
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="reverseArray2()"
+              >
+                查看原陣列
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- 排序陣列 -->
+        <div
+          class="tab-pane fade"
+          id="nav-sort"
+          role="tabpanel"
+          aria-labelledby="nav-sort-tab"
+          tabindex="0"
+        >
+          <h4>sort([compareFunction(a,b)])</h4>
+          <h5>將陣列元素排序，會改變原始陣列</h5>
+          <ul class="highlight">
+            <li>預設排序：會以 Unicode 編碼位置來排序，也就是照字母排序</li>
+            <li>自定義排序：<br /></li>
+            <ul>
+              加上 [compareFunction(a,b)] 自定義比較函式，函式中應包含兩個參數 a
+              與 b，<br />
+              透過比較 a 與 b 然後傳回一個數字，可能是正數、負數或 0
+              ，並得出以下結果：
+              <li>回傳值 > 0 (正數)，表示 b 排序在 a 前面</li>
+              <li>回傳值 < 0 (負數)，表示 a 排序在 b 前面</li>
+              <li>回傳值 = 0，不執行任何結果</li>
+            </ul>
+          </ul>
+          <hr />
+          <h5>> 預設排序</h5>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-600">
+              <p>觀察數字的變化</p>
+              <span class="text-primary">let</span> arrNum = [12900, 877, 12,
+              992, 10000]
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="sortArray1()"
+            >
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-600">
+              <p>觀察字母的變化</p>
+              <span class="text-primary">let</span> people = ['Steven', 'Jane',
+              'Bread', 'Tom', "Iris"]
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="sortArray2()"
+            >
+              Try me
+            </button>
+          </div>
+          <hr />
+          <h5>>自定義排序</h5>
+          <div class="code mb-4">
+            <p>
+              <span class="text-primary">let </span> arrNumf = [40, 1, 5,
+              200]<br />
+              <span class="text-primary">let </span> arrStringNum = ["80", "9",
+              "700"]<br />
+              <span class="text-primary">let </span> arrMixed = ["80", "9",
+              "700", 40, 1, 5, 200]<br />
+            </p>
+            <p>
+              <span class="text-success">function</span> compareNumbers(a, b)
+              {<br />
+              return a - b;<br />
+              }
+            </p>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-400">
+              arrNumf.sort()<br />
+              arrNumf.sort(compareNumbers)<br />
+            </div>
+            <div class="w-600 d-flex justify-content-between">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="sortArrayF11()"
+              >
+                sort()預設結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-info"
+                onclick="sortArrayF12()"
+              >
+                sort()函式結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="sortArrayF13()"
+              >
+                觀察 arrNumf 原陣列
+              </button>
+            </div>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-400">
+              arrStringNum.sort()<br />
+              arrStringNum.sort(compareNumbers)<br />
+            </div>
+            <div class="w-600 d-flex justify-content-between">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="sortArrayF21()"
+              >
+                sort()預設結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-info"
+                onclick="sortArrayF22()"
+              >
+                sort()函式結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="sortArrayF23()"
+              >
+                觀察 arrStringNum 原陣列
+              </button>
+            </div>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-400">
+              arrMixed.sort()<br />
+              arrMixed.sort(compareNumbers)<br />
+            </div>
+            <div class="w-600 d-flex justify-content-between">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="sortArrayF31()"
+              >
+                sort()預設結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-info"
+                onclick="sortArrayF32()"
+              >
+                sort()函式結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="sortArrayF33()"
+              >
+                觀察 arrMixed 原陣列
+              </button>
+            </div>
+          </div>
+          <!-- 物件 -->
+          <hr />
+          <h5>>應用在陣列物件</h5>
+          <p class="code">
+            <span class="text-primary">let </span>MFEE40 = [<br />
+            <span class="ms-3">{ name: "Bread", age: 25 },</span><br />
+            <span class="ms-3">{ name: "Steven", age: 30 },</span><br />
+            <span class="ms-3">{ name: "Tom", age: 26 },</span><br />
+            <span class="ms-3">{ name: "Fix", age: 28 },</span><br />
+            <span class="ms-3">{ name: "Mei", age: 18 },</span><br />
+            <span class="ms-3">{ name: "Bear", age: 33 },</span><br />
+            ]
+          </p>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">
+              <span class="text-success">排序 age 數值</span><br />
+              MFEE40.sort((a, b) => a.age - b.age)<br />
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="sortArrayO1()"
+            >
+              See console
+            </button>
+          </div>
+          <hr />
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">
+              <span class="text-success">排序 name 字串 </span> <br />
+              MFEE40.sort((a, b) => {<br />
+              <div class="ms-4">
+                let nameA = a.name.toUpperCase();<br />
+                let nameB = b.name.toUpperCase();<br />
+                if (nameA < nameB) {<br />
+                return -1;<br />
+                }<br />
+                if (nameA > nameB) {<br />
+                return 1;<br />
+                }<br />
+                return 0;<br />
+              </div>
+              })<br />
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="sortArrayO2()"
+            >
+              See console
+            </button>
+          </div>
+        </div>
+        <!-- 不改變陣列 -->
+        <div
+          class="tab-pane fade"
+          id="nav-to"
+          role="tabpanel"
+          aria-labelledby="nav-to-tab"
+          tabindex="0"
+        >
+          <h4>toReversed()</h4>
+          <h5>用法同reverse()，但不會修改原陣列</h5>
+          <hr />
+          <h5>> 觀察 reverse() / toReversed() 差異</h5>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-400">
+              <p class="text-success">reverse()</p>
+              <span class="text-primary">let</span> array = [1, 2, 3]<br />
+              <span class="text-primary">let</span> arrReverse =
+              array.reverse()<br />
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="reArray12()"
+              >
+                reverse() 結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="reArray11()"
+              >
+                觀察 array 原陣列
+              </button>
+            </div>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-400">
+              <p class="text-success">toReversed()</p>
+              <span class="text-primary">let</span> array = [1, 2, 3]<br />
+              <span class="text-primary">let</span> arrToReversed =
+              array.toReversed()<br />
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="reArray22()"
+              >
+                toReversed() 結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="reArray21()"
+              >
+                觀察 array 原陣列
+              </button>
+            </div>
+          </div>
+          <hr />
+          <!-- ----------------------------------------------------------- -->
+          <h4>toSorted()</h4>
+          <h5>用法同sort()，但不會修改原陣列</h5>
+          <hr />
+          <h5>> 觀察 sort() / toSorted() 差異</h5>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-400">
+              <p class="text-success">sort()</p>
+              <span class="text-primary">let</span> array = [3, 1, 2]<br />
+              <span class="text-primary">let</span> arrSort = array.sort()<br />
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="soArray12()"
+              >
+                sort() 結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="soArray11()"
+              >
+                觀察 array 原陣列
+              </button>
+            </div>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3 code w-400">
+              <p class="text-success">toSorted()</p>
+              <span class="text-primary">let</span> array = [3, 1, 2]<br />
+              <span class="text-primary">let</span> arrToSorted =
+              array.toSorted()<br />
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="soArray22()"
+              >
+                toSorted() 結果
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="soArray21()"
+              >
+                觀察 array 原陣列
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // reverse()
+      let arrName = ["柏叡", "騰寓", "胤辰"];
+      let arrNameReversed = arrName.reverse();
+      function reverseArray1() {
+        alert(arrNameReversed);
+      }
+      function reverseArray2() {
+        alert(arrName);
+      }
+
+      // sort 預設
+      let arrNum = [12900, 877, 12, 992, 10000];
+      let people = ["Steven", "Jane", "Bread", "Tom", "Iris"];
+      function sortArray1() {
+        alert(arrNum.sort());
+      }
+      function sortArray2() {
+        alert(people.sort());
+      }
+
+      let arrNumf = [40, 1, 5, 200];
+      let arrStringNum = ["80", "9", "700"];
+      let arrMixed = ["80", "9", "700", 40, 1, 5, 200];
+      function compareNumbers(a, b) {
+        return a - b;
+      }
+
+      function sortArrayF11() {
+        alert(arrNumf.sort());
+      }
+      function sortArrayF12() {
+        alert(arrNumf.sort(compareNumbers));
+      }
+      function sortArrayF13() {
+        alert(arrNumf);
+      }
+
+      function sortArrayF21() {
+        alert(arrStringNum.sort());
+      }
+      function sortArrayF22() {
+        alert(arrStringNum.sort(compareNumbers));
+      }
+      function sortArrayF23() {
+        alert(arrStringNum);
+      }
+      function sortArrayF31() {
+        alert(arrMixed.sort());
+      }
+      function sortArrayF32() {
+        alert(arrMixed.sort(compareNumbers));
+      }
+      function sortArrayF33() {
+        alert(arrMixed);
+      }
+
+      // 物件
+
+      function sortArrayO1() {
+        let MFEE40 = [
+          { name: "Bread", age: 25 },
+          { name: "Steven", age: 30 },
+          { name: "Tom", age: 26 },
+          { name: "Fix", age: 28 },
+          { name: "Mei", age: 18 },
+          { name: "Bear", age: 33 },
+        ];
+        MFEE40.sort((a, b) => a.age - b.age);
+        let MFEE40asString = JSON.stringify(MFEE40);
+        alert(MFEE40asString);
+        console.log(MFEE40);
+      }
+
+      function sortArrayO2() {
+        let MFEE40 = [
+          { name: "Bread", age: 25 },
+          { name: "Steven", age: 30 },
+          { name: "Tom", age: 26 },
+          { name: "Fix", age: 28 },
+          { name: "Mei", age: 18 },
+          { name: "Bear", age: 33 },
+        ];
+        MFEE40.sort((a, b) => {
+          // 在編碼時，大小寫有差，因此先統一大寫
+          let nameA = a.name.toUpperCase();
+          let nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        let MFEE40asString = JSON.stringify(MFEE40);
+        alert(MFEE40asString);
+        console.log(MFEE40);
+      }
+
+      // reverse / toReversed
+      let arrAr = [1, 2, 3];
+      let arrBr = arrAr.reverse();
+      function reArray11() {
+        alert(`原陣列已改變
+${arrAr}`);
+      }
+
+      function reArray12() {
+        alert(`參照原陣列
+${arrBr}`);
+      }
+
+      let arrCr = [1, 2, 3];
+      let arrDr = arrCr.toReversed();
+      function reArray21() {
+        alert(`原陣列不受影響
+${arrCr}`);
+      }
+
+      function reArray22() {
+        alert(`以副本結果
+${arrDr}`);
+      }
+      // sort /roSorted
+      let arrAs = [3, 1, 2];
+      let arrBs = arrAs.sort();
+      function soArray11() {
+        alert(`原陣列已改變
+${arrAs}`);
+      }
+
+      function soArray12() {
+        alert(`參照原陣列
+${arrBs}`);
+      }
+      let arrCs = [3, 1, 2];
+      let arrDs = arrCs.toSorted();
+      function soArray21() {
+        alert(`原陣列不受影響
+${arrCs}`);
+      }
+
+      function soArray22() {
+        alert(`以副本結果
+${arrDs}`);
+      }
+    </script>
+  </body>
+</html>

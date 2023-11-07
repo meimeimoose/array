@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>title</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      a {
+        margin: 2rem 0;
+        font-size: 1.6rem;
+        color: #838383;
+        text-decoration: none;
+        padding-right: 1.8rem;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .a-active {
+        font-size: 2rem;
+        font-weight: bolder;
+        color: #0d6efd;
+        padding-bottom: 0.25rem;
+      }
+      .code {
+        background-color: rgb(242, 242, 242);
+        padding: 2rem 1.5rem;
+        border-radius: 18px;
+      }
+      .w-400 {
+        width: 360px;
+      }
+      .highlight {
+        margin-left: 1rem;
+        border-left: 4px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <a class="a-active" href="/index.html">Array | 基本陣列 CRUD</a>
+        <a href="/filter/index.html">Array | 陣列排序之方</a>
+      </div>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button
+            class="nav-link me-4 active"
+            id="nav-isArray-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-isArray"
+            type="button"
+            role="tab"
+            aria-controls="nav-isArray"
+            aria-selected="true"
+          >
+            判斷陣列
+          </button>
+          <button
+            class="nav-link me-4"
+            id="nav-merge-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-merge"
+            type="button"
+            role="tab"
+            aria-controls="nav-merge"
+            aria-selected="false"
+          >
+            合併、組合陣列
+          </button>
+          <button
+            class="nav-link me-4"
+            id="nav-pop-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-pop"
+            type="button"
+            role="tab"
+            aria-controls="nav-pop"
+            aria-selected="false"
+          >
+            取出陣列
+          </button>
+          <button
+            class="nav-link me-4"
+            id="nav-editAdd-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-editAdd"
+            type="button"
+            role="tab"
+            aria-controls="nav-editAdd"
+            aria-selected="false"
+          >
+            修改－新增陣列
+          </button>
+          <button
+            class="nav-link me-4"
+            id="nav-editDel-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-editDel"
+            type="button"
+            role="tab"
+            aria-controls="nav-editDel"
+            aria-selected="false"
+          >
+            修改－刪除陣列
+          </button>
+          <button
+            class="nav-link me-4"
+            id="nav-cut-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-cut"
+            type="button"
+            role="tab"
+            aria-controls="nav-cut"
+            aria-selected="false"
+          >
+            切割、複製陣列
+          </button>
+        </div>
+      </nav>
+      <div class="tab-content mt-4" id="nav-tabContent">
+        <!-- 判斷陣列 -->
+        <div
+          class="tab-pane fade show active"
+          id="nav-isArray"
+          role="tabpanel"
+          aria-labelledby="nav-isArray-tab"
+          tabindex="0"
+        >
+          <h4>Array.isArray()</h4>
+          <h5>判斷是否為陣列，會回傳布林值</h5>
+          <p class="code">
+            <span class="text-primary">let</span> testArr = [1,2,3,4,5]<br />
+            <span class="text-primary">let</span> testNum = 123 <br />
+            <span class="text-primary">let</span> testNum = 123 <br />
+          </p>
+          <hr />
+          <div class="d-flex justify-content-between w-100">
+            <div
+              class="mb-4 d-flex flex-column justify-content-center align-items-center"
+            >
+              <div class="me-3">Array.isArray(testArr)</div>
+              <button
+                type="button"
+                class="btn btn-primary mt-4 w-100"
+                onclick="checkArray1()"
+              >
+                Try me
+              </button>
+            </div>
+            <div
+              class="mb-4 d-flex flex-column justify-content-center align-items-center"
+            >
+              <div class="text-center">Array.isArray(testNum)</div>
+              <button
+                type="button"
+                class="btn btn-primary mt-4 w-100"
+                onclick="checkArray2()"
+              >
+                Try me
+              </button>
+            </div>
+            <div
+              class="mb-4 d-flex flex-column justify-content-center align-items-center"
+            >
+              <div class="text-center">Array.isArray(testString)</div>
+              <button
+                type="button"
+                class="btn btn-primary mt-4 w-100"
+                onclick="checkArray3()"
+              >
+                Try me
+              </button>
+            </div>
+            <div
+              class="mb-4 d-flex flex-column justify-content-center align-items-center"
+            >
+              <div class="text-center">如果給：isArray('[]')</div>
+              <button
+                type="button"
+                class="btn btn-primary mt-4 w-100"
+                onclick="checkArray4()"
+              >
+                Try me
+              </button>
+            </div>
+            <div
+              class="mb-4 d-flex flex-column justify-content-center align-items-center"
+            >
+              <div class="text-center">如果給：isArray([])</div>
+              <button
+                type="button"
+                class="btn btn-primary mt-4 w-100"
+                onclick="checkArray5()"
+              >
+                Try me
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- 合併陣列 -->
+        <div
+          class="tab-pane fade"
+          id="nav-merge"
+          role="tabpanel"
+          aria-labelledby="nav-merge-tab"
+          tabindex="0"
+        >
+          <h4>concat(array)</h4>
+          <h5>合併陣列，將不同的陣列組合成一個新陣列</h5>
+          <hr />
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <div class="me-3 code w-400">
+                <span class="text-primary">let</span> arr1 = ['a','b','c']<br />
+                <span class="text-primary">let</span> arr2 = ['d','e','f']<br />
+              </div>
+              => 合併陣列 : arr1add2 = arr1.concat(arr2)>
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="mergeArray1()"
+            >
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <div class="me-3 code w-400">
+                <span class="text-primary">let</span> num1=[1,2,3]<br /><span
+                  class="text-primary"
+                  >let</span
+                >
+                num1=[4,5,6]<br /><span class="text-primary">let</span>
+                num3=[7,8,9]
+                <br />
+              </div>
+              => 合併多個陣列 : numAll = num1.concat(num2,num3)
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="mergeArray2()"
+            >
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <div class="me-3 code w-400">
+                <span class="text-primary">let</span> friend =
+                ['Steven','Bread'];<br />friend.concat('Mei') <br />
+              </div>
+              => 將字串加入陣列 : 加入'Mei'
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="mergeArray3()"
+            >
+              Try me
+            </button>
+          </div>
+          <h4>flat()</h4>
+          <h5>將多維陣列扁平化為一維陣列</h5>
+          <p class="code">
+            <span class="text-primary">let</span> arrA = [1,2,[3],[4,[5,[6]]]]
+          </p>
+          <hr />
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">arrB = arrA.flat()</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="mergeFlatArray1()"
+            >
+              See console.log
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">arrC = arrA.flat(2)</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="mergeFlatArray2()"
+            >
+              See console.log
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">arrE = arrA.flat(1)</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="mergeFlatArray4()"
+            >
+              See console.log
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">arrD = arrA.flat(Infinity)</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="mergeFlatArray3()"
+            >
+              See console.log
+            </button>
+          </div>
+        </div>
+        <!-- 取出陣列 -->
+        <div
+          class="tab-pane fade"
+          id="nav-pop"
+          role="tabpanel"
+          aria-labelledby="nav-pop-tab"
+          tabindex="0"
+        >
+          <h4>pop()</h4>
+          <h5>從陣列末端取出最後一個元素值並回傳，會修改原陣列</h5>
+          <p class="code">
+            <span class="text-primary">let</span> human = ['white', 'yellow',
+            'black']
+          </p>
+          <hr />
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">取出<br />human.pop()</div>
+            <button type="button" class="btn btn-primary" onclick="popArray1()">
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="me-3">原陣列<br />human</div>
+            <button type="button" class="btn btn-primary" onclick="popArray2()">
+              查看原陣列
+            </button>
+          </div>
+        </div>
+        <!-- 修改/新增陣列 -->
+        <div
+          class="tab-pane fade"
+          id="nav-editAdd"
+          role="tabpanel"
+          aria-labelledby="nav-editAdd-tab"
+          tabindex="0"
+        >
+          <h4>push(item1,item2 …)</h4>
+          <h5>在陣列末端加入多元素，會修改原陣列並 回傳陣列的新長度</h5>
+          <p class="code">
+            <span class="text-primary">let</span> weather =
+            ['sunny','rainy','cloudy']
+          </p>
+
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="code w-400">
+              <span class="text-primary">let</span> weatherType = <br />
+              weather.push('foggy','gusty')
+            </div>
+            <div class="d-flex flex-column">
+              <button
+                type="button"
+                class="btn btn-primary mb-3"
+                onclick="editAddArray1()"
+              >
+                weatherType = ?
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="editAddArray2()"
+              >
+                查看原陣列
+              </button>
+            </div>
+          </div>
+          <hr />
+          <h4>shift()</h4>
+          <h5>從陣列前端取出第一個元素值並回傳，會修改原陣列</h5>
+          <p class="code">
+            <span class="text-primary">let</span> shape = ["box", "ovel",
+            "line"]
+          </p>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="code w-400">
+              <span class="text-primary">let</span> cutShape = shape.shift()
+            </div>
+            <div class="d-flex flex-column">
+              <button
+                type="button"
+                class="btn btn-primary mb-3"
+                onclick="editAddArray31()"
+              >
+                cutShape = ?
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="editAddArray32()"
+              >
+                查看原陣列
+              </button>
+            </div>
+          </div>
+          <hr />
+          <h4>unshift()</h4>
+          <h5>
+            將元素新增至陣列的開頭，以「,」接續複數值，會修改原陣列、並回傳陣列的新長度
+          </h5>
+          <div class="code">
+            <p>
+              <span class="text-primary">let</span> color = ['white', 'yellow',
+              'black']
+            </p>
+            <p><span class="text-primary">let</span> soul = ['people']</p>
+          </div>
+
+          <hr />
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="code w-400">color.unshift('red')</div>
+            <div class="d-flex flex-column">
+              <button
+                type="button"
+                class="btn btn-primary mb-3"
+                onclick="editAddArray71()"
+              >
+                會回傳 = ?
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="editAddArray72()"
+              >
+                查看原陣列
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div class="code w-400">soul.unshift('god','devil')</div>
+            <div class="d-flex flex-column">
+              <button
+                type="button"
+                class="btn btn-primary mb-3"
+                onclick="editAddArray81()"
+              >
+                會回傳 = ?
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="editAddArray82()"
+              >
+                查看原陣列
+              </button>
+            </div>
+          </div>
+          <hr />
+          <h4>fill()</h4>
+          <h5>從指定位置，將該範圍內的陣列元素、取代為指定值</h5>
+          <p class="code">
+            <span class="text-primary">let</span> arrNum = [1,2,3,4]
+          </p>
+
+          <hr />
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>arrNum.fill('a',2,5)</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="editAddArray4()"
+            >
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>arrNum.fill('b',1)</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="editAddArray5()"
+            >
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>arrNum.fill('c')</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="editAddArray6()"
+            >
+              Try me
+            </button>
+          </div>
+        </div>
+        <!-- 修改/刪除陣列 -->
+        <div
+          class="tab-pane fade"
+          id="nav-editDel"
+          role="tabpanel"
+          aria-labelledby="nav-editDel-tab"
+          tabindex="0"
+        >
+          <h4>splice(index[,delnum[,additem]])</h4>
+          <h5>插入、刪除、替換陣列內元素，會修改原陣列</h5>
+          <ul class="highlight">
+            <li>index－表示開始的位置</li>
+            <li>delnum－表示是否刪除</li>
+            <ul>
+              <li>可省略，表示刪除 index 後所有的元素</li>
+              <li>若為 0 或負數，表示不刪除任何元素</li>
+            </ul>
+            <li>additem－要替換的值()</li>
+          </ul>
+          <p class="code">
+            <span class="text-primary">let</span> month = ['Jan', 'March',
+            'April', 'June']
+          </p>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>month.splice(1, 0, 'Feb')</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="editDelArray1()"
+            >
+              month = ?
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>month.splice(4, 1, 'May')</div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="editDelArray2()"
+            >
+              month = ?
+            </button>
+          </div>
+          <hr />
+          <!-- ---------------------------- -->
+          <h3 class="text-success mb-3">＊窩不想改變原陣列捏？</h3>
+          <h4>toSpliced</h4>
+
+          <h5>一樣的用法，但將結果另存副本</h5>
+          <p class="ms-2">=> 請觀察 splice()、toSpliced() 的差異</p>
+          <div class="d-flex justify-content-start mt-4">
+            <!-- splice() -->
+            <div class="d-flex flex-column me-5">
+              <h5>splice()</h5>
+              <div>
+                <span class="text-primary">let</span> Array = [1, 2, 3, 4]<br />
+                <span class="text-primary">let</span> arrSplice =
+                Array.splice(1,2)
+              </div>
+              <div class="mt-3 mb-5 f-">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="splice1()"
+                >
+                  原本的 Array
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="splice2()"
+                >
+                  splice 結果
+                </button>
+              </div>
+            </div>
+            <!-- toSpliced() -->
+            <div class="d-flex flex-column">
+              <h5>toSpliced()</h5>
+              <div>
+                <span class="text-primary">let</span> Array = [1, 2, 3, 4]<br />
+                <span class="text-primary">let</span> arrToSpliced =
+                Array.toSpliced(1,2)
+              </div>
+              <div class="mt-3 mb-5">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="spliced1()"
+                >
+                  原本的 Array
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="spliced2()"
+                >
+                  toSpliced 結果
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 切割/複製陣列 -->
+        <div
+          class="tab-pane fade"
+          id="nav-cut"
+          role="tabpanel"
+          aria-labelledby="nav-cut-tab"
+          tabindex="0"
+        >
+          <h4>join([separator])</h4>
+          <h5>將陣列裡的每筆元素、用符號串成字串</h5>
+          <p class="code">
+            <span class="text-primary">let</span> emotion =
+            ['love','happy','angry','sad']
+          </p>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-primary">let</span> emotionJoin =
+              emotion.join('-')
+            </div>
+            <button type="button" class="btn btn-primary" onclick="cutArray1()">
+              Try me
+            </button>
+          </div>
+          <hr />
+          <h4>slice(start,end)</h4>
+          <h5>
+            從索引值 start 到索引值 end ，之間複製出部分陣列，不會更改原本陣列
+          </h5>
+          <ul class="highlight">
+            <li>arr.slice()</li>
+            <li>arr.slice(start)</li>
+            <li>arr.slice(start,end)</li>
+          </ul>
+          <p class="code">
+            <span class="text-primary"
+              ><span class="text-primary">let</span></span
+            >
+            zooAustralia = ['kangaroo', 'wombat', 'koala', 'glider',
+            'kookaburra']
+          </p>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>zooAustralia.slice()</div>
+            <button type="button" class="btn btn-primary" onclick="cutArray2()">
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>zooAustralia.slice(2,4)</div>
+            <button type="button" class="btn btn-primary" onclick="cutArray3()">
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>zooAustralia.slice(1,5)</div>
+            <button type="button" class="btn btn-primary" onclick="cutArray4()">
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>zooAustralia.slice(-2)</div>
+            <button type="button" class="btn btn-primary" onclick="cutArray5()">
+              Try me
+            </button>
+          </div>
+          <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>zooAustralia.slice(2,-1)</div>
+            <button type="button" class="btn btn-primary" onclick="cutArray6()">
+              Try me
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // 判斷陣列 ----------------------------------
+      function checkArray1() {
+        let testArr = [1, 2, 3, 4, 5];
+        alert(Array.isArray([1, 3, 5]));
+      }
+      function checkArray2() {
+        let testNum = 123;
+        alert(Array.isArray(testNum));
+      }
+      function checkArray3() {
+        let testString = "tired";
+        alert(Array.isArray(testString));
+      }
+      function checkArray4() {
+        alert(Array.isArray("[]"));
+      }
+      function checkArray5() {
+        alert(Array.isArray([]));
+      }
+
+      // 合併陣列 ----------------------------------
+      function mergeArray1() {
+        let arr1 = ["a", "b", "c"];
+        let arr2 = ["d", "e", "f"];
+        let arr1add2 = arr1.concat(arr2);
+        alert(arr1add2); //=> ['a','b','c','d','e','f']
+      }
+
+      function mergeArray2() {
+        let num1 = [1, 2, 3];
+        let num2 = [4, 5, 6];
+        let num3 = [7, 8, 9];
+
+        let numAll = num1.concat(num2, num3);
+        alert(numAll); //=> [1,2,3,4,5,6,7,8,9]
+      }
+
+      function mergeArray3() {
+        let friend = ["Steven", "Bread"];
+
+        let friendAll = friend.concat("Mei");
+        alert(friendAll);
+      }
+
+      let arrA = [1, 2, [3], [4, [5, [6]]]];
+      let arrB = arrA.flat();
+      let arrC = arrA.flat(2);
+      let arrD = arrA.flat(Infinity);
+      let arrE = arrA.flat(1);
+
+      let arrBAsString = JSON.stringify(arrB);
+      let arrCAsString = JSON.stringify(arrC);
+      let arrDAsString = JSON.stringify(arrD);
+      let arrEAsString = JSON.stringify(arrE);
+
+      function mergeFlatArray1() {
+        alert(arrBAsString);
+        console.log(arrB);
+      }
+      function mergeFlatArray2() {
+        alert(arrCAsString);
+        console.log(arrC);
+      }
+      function mergeFlatArray3() {
+        alert(arrDAsString);
+        console.log(arrD);
+      }
+      function mergeFlatArray4() {
+        alert(arrEAsString);
+        console.log(arrE);
+      }
+
+      // 取出陣列 ----------------------------------
+      let human = ["white", "yellow", "black"];
+      function popArray1() {
+        alert(human.pop());
+      }
+      function popArray2() {
+        alert(human);
+      }
+
+      // 修改新增陣列 -------------------------------
+      let weather = ["sunny", "rainy", "cloudy"];
+      function editAddArray1() {
+        let weatherType = weather.push("foggy", "gusty");
+        alert(weatherType); //=> 5
+      }
+      function editAddArray2() {
+        alert(weather);
+      }
+
+      let shape = ["box", "ovel", "line"];
+      let cutShape = shape.shift();
+      function editAddArray31() {
+        alert(cutShape);
+      }
+      function editAddArray32() {
+        alert(shape);
+      }
+
+      let arrNum = [1, 2, 3, 4];
+      function editAddArray4() {
+        alert(arrNum.fill("a", 2, 5));
+      }
+      function editAddArray5() {
+        alert(arrNum.fill("b", 1));
+      }
+      function editAddArray6() {
+        alert(arrNum.fill("c"));
+      }
+
+      let color = ["white", "yellow", "black"];
+      let soul = ["people"];
+      function editAddArray71() {
+        alert(color.unshift("red"));
+      }
+      function editAddArray72() {
+        alert(color);
+      }
+
+      function editAddArray81() {
+        alert(soul.unshift("god", "devil"));
+      }
+      function editAddArray82() {
+        alert(soul);
+      }
+
+      // 新增刪除陣列
+      let month = ["Jan", "March", "April", "June"];
+      function editDelArray1() {
+        month.splice(1, 0, "Feb");
+        alert(month);
+      }
+
+      function editDelArray2() {
+        month.splice(4, 1, "May");
+        alert(month);
+      }
+
+      // 切割複製陣列
+      let emotion = ["love", "happy", "angry", "sad"];
+      function cutArray1() {
+        let emotionJoin = emotion.join("-");
+        alert(emotionJoin);
+      }
+      let zooAustralia = [
+        "kangaroo",
+        "wombat",
+        "koala",
+        "glider",
+        "kookaburra",
+      ];
+      function cutArray2() {
+        alert(zooAustralia.slice());
+      }
+
+      function cutArray3() {
+        alert(zooAustralia.slice(2, 4));
+      }
+      function cutArray4() {
+        alert(zooAustralia.slice(1, 5));
+      }
+      function cutArray5() {
+        alert(zooAustralia.slice(-2));
+      }
+      function cutArray6() {
+        alert(zooAustralia.slice(2, -1));
+      }
+      // splice()
+      let arrAs = [1, 2, 3, 4];
+      let arrBs = arrAs.splice(1, 2);
+
+      function splice1() {
+        alert(`原陣列已改變
+${arrAs}`);
+      }
+
+      function splice2() {
+        alert(`回傳被操作過的陣列
+${arrBs}`);
+      }
+
+      // toSpliced()
+      let arrCsd = [1, 2, 3, 4];
+      let arrDsd = arrCsd.toSpliced(1, 2);
+
+      function spliced1() {
+        alert(`原陣列不受影響
+${arrCsd}`);
+      }
+      function spliced2() {
+        alert(`回傳被操作的值(副本)
+${arrDsd}`);
+      }
+    </script>
+  </body>
+</html>
